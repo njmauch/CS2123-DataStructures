@@ -1,0 +1,5 @@
+﻿  cs2123p6Driver.c
+c:\users\njmau\source\repos\cs2123p6\cs2123p6\cs2123p6driver.c(300): warning C4033: 'insertFlight' must return a value
+c:\users\njmau\source\repos\cs2123p6\cs2123p6\cs2123p6driver.c(311): warning C4033: 'insertFlight' must return a value
+c:\users\njmau\source\repos\cs2123p6\cs2123p6\cs2123p6driver.c(312): warning C4716: 'insertFlight': must return a value
+  cs2123p6.vcxproj -> C:\Users\njmau\source\repos\cs2123p6\Debug\cs2123p6.exe

@@ -1,0 +1,5 @@
+﻿  cs2123p2.c
+c:\users\njmau\source\repos\cs2123p2\cs2123p2\cs2123p2.c(39): warning C4013: 'strcpy' undefined; assuming extern returning int
+c:\users\njmau\source\repos\cs2123p2\cs2123p2\cs2123p2.c(139): warning C4013: 'printf' undefined; assuming extern returning int
+c:\users\njmau\source\repos\cs2123p2\cs2123p2\cs2123p2.c(202): warning C4013: 'strcmp' undefined; assuming extern returning int
+  cs2123p2.vcxproj -> C:\Users\njmau\source\repos\cs2123p2\Debug\cs2123p2.exe

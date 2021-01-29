@@ -1,0 +1,6 @@
+﻿  cs2123p6Driver.c
+c:\users\njmau\source\repos\cs2123p6-2\cs2123p6-2\cs2123p6driver.c(302): warning C4033: 'insertFlight' must return a value
+c:\users\njmau\source\repos\cs2123p6-2\cs2123p6-2\cs2123p6driver.c(313): warning C4033: 'insertFlight' must return a value
+c:\users\njmau\source\repos\cs2123p6-2\cs2123p6-2\cs2123p6driver.c(692): warning C4101: 'i': unreferenced local variable
+c:\users\njmau\source\repos\cs2123p6-2\cs2123p6-2\cs2123p6driver.c(314): warning C4716: 'insertFlight': must return a value
+  cs2123p6-2.vcxproj -> C:\Users\njmau\source\repos\cs2123p6-2\Debug\cs2123p6-2.exe

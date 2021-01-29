@@ -1,0 +1,600 @@
+* 1. some beginning flights
+FLIGHT S1 SAT IAH 600 30 0
+FLIGHT S3 SAT ATL 1000 150 1
+FLIGHT S2 SAT MCO 800 150 1
+FLIGHT H1 IAH SAT 1200 40 0
+FLIGHT H2 IAH ATL 300 140 1 
+FLIGHT H5 IAH PHX 1500 120 -1
+FLIGHT H3 IAH MCO 1400 130 1
+FLIGHT H4 IAH LAX 1300 200 -2
+FLIGHT P1 PHX DEN 700 40 0
+FLIGHT P2 PHX IAH 800 110 1
+FLIGHT P3 PHX LAX 900 90 -1
+* 2. print those flights by origin and then by dest
+PRTFLIGHTBYORIGIN
+ Apt F# Dest Dep  Arr  Dur
+ SAT S1 IAH  0600 0630  30
+     S2 MCO  0800 1130 150
+     S3 ATL  1000 1330 150
+ IAH H1 SAT  1200 1240  40
+     H2 ATL  0300 0620 140
+     H3 MCO  1400 1710 130
+     H4 LAX  1300 1420 200
+     H5 PHX  1500 1600 120
+ PHX P1 DEN  0700 0740  40
+     P2 IAH  0800 1050 110
+     P3 LAX  0900 0930  90
+PRTFLIGHTBYDEST
+ Apt Orig Fl Dep  Arr  Dur 
+ SAT IAH  H1 1200 1240  40
+ IAH PHX  P2 0800 1050 110
+     SAT  S1 0600 0630  30
+ ATL IAH  H2 0300 0620 140
+     SAT  S3 1000 1330 150
+ MCO IAH  H3 1400 1710 130
+     SAT  S2 0800 1130 150
+ PHX IAH  H5 1500 1600 120
+ LAX IAH  H4 1300 1420 200
+     PHX  P3 0900 0930  90
+ DEN PHX  P1 0700 0740  40
+*
+* 3. SAT should have one predecessor and 3 successors
+*
+PRTONE SAT
+  0 SAT H1/IAH ...... ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL 
+*
+* 4. IAH should have 2 predecessors and 5 successors
+* 
+PRTALL
+  0 SAT H1/IAH ...... ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL 
+  1 IAH P2/PHX S1/SAT ...... ...... ...... ...... ...... ...... H1-SAT H2-ATL H3-MCO H4-LAX H5-PHX 
+  2 ATL H2/IAH S3/SAT ...... ...... ...... ...... ...... ...... ...... 
+  3 MCO H3/IAH S2/SAT ...... ...... ...... ...... ...... ...... ...... 
+  4 PHX H5/IAH ...... ...... ...... ...... ...... ...... ...... P1-DEN P2-IAH P3-LAX 
+  5 LAX H4/IAH P3/PHX ...... ...... ...... ...... ...... ...... ...... 
+  6 DEN P1/PHX ...... ...... ...... ...... ...... ...... ...... ...... 
+*
+* 5. Since we have very few flights, the successor indented output is short
+*    Ignoring time, the longest paths: S1-IAH to H5-PHX to either P3-LAX or P1-DEN
+*
+PRTSUCC SAT
+ S1-IAH 0600-0630
+     H2-ATL 0300-0620
+     H3-MCO 1400-1710
+     H4-LAX 1300-1420
+     H5-PHX 1500-1600
+         P1-DEN 0700-0740
+         P3-LAX 0900-0930
+ S2-MCO 0800-1130
+ S3-ATL 1000-1330
+*
+* 6. Considering time, shorter paths
+* 
+PRTCHRON SAT
+ S1-IAH 0600-0630
+       H3-MCO 1400-1710
+       H4-LAX 1300-1420
+       H5-PHX 1500-1600
+ S2-MCO 0800-1130
+ S3-ATL 1000-1330
+PRTALTS SAT MCO
+ Alternatives for flights from SAT to MCO
+ Alt TDur             Org Dst Fl Dep - Arr Dura
+   1 11 Hours 10 mins
+                      SAT IAH S1 0600-0630   30
+                      IAH MCO H3 1400-1710  130
+   2 3 Hours 30 mins
+                      SAT MCO S2 0800-1130  150
+MAXSTEPS SAT MCO
+ Maximum chain chron for SAT to MCO contains 2 steps
+*
+* 7. more flights
+*
+FLIGHT P4 PHX MCO 1000 220 2
+FLIGHT P5 PHX ATL 1100 200 2
+FLIGHT A1 ATL MCO 1500 50 0
+FLIGHT A2 ATL IAH 800 140 -1
+FLIGHT A3 ATL PHX 1300 210 -2
+FLIGHT A4 ATL RIC 1900 50 0
+FLIGHT A5 ATL IAH 1800 140 -1
+FLIGHT R1 RIC ATL 900 50 0
+*
+* 8. show the flights
+* 
+PRTFLIGHTBYORIGIN
+ Apt F# Dest Dep  Arr  Dur
+ SAT S1 IAH  0600 0630  30
+     S2 MCO  0800 1130 150
+     S3 ATL  1000 1330 150
+ IAH H1 SAT  1200 1240  40
+     H2 ATL  0300 0620 140
+     H3 MCO  1400 1710 130
+     H4 LAX  1300 1420 200
+     H5 PHX  1500 1600 120
+ ATL A1 MCO  1500 1550  50
+     A2 IAH  0800 0920 140
+     A3 PHX  1300 1430 210
+     A4 RIC  1900 1950  50
+     A5 IAH  1800 1920 140
+ PHX P1 DEN  0700 0740  40
+     P2 IAH  0800 1050 110
+     P3 LAX  0900 0930  90
+     P4 MCO  1000 1540 220
+     P5 ATL  1100 1620 200
+ RIC R1 ATL  0900 0950  50
+PRTFLIGHTBYDEST
+ Apt Orig Fl Dep  Arr  Dur 
+ SAT IAH  H1 1200 1240  40
+ IAH ATL  A2 0800 0920 140
+     ATL  A5 1800 1920 140
+     PHX  P2 0800 1050 110
+     SAT  S1 0600 0630  30
+ ATL IAH  H2 0300 0620 140
+     PHX  P5 1100 1620 200
+     RIC  R1 0900 0950  50
+     SAT  S3 1000 1330 150
+ MCO ATL  A1 1500 1550  50
+     IAH  H3 1400 1710 130
+     PHX  P4 1000 1540 220
+     SAT  S2 0800 1130 150
+ PHX ATL  A3 1300 1430 210
+     IAH  H5 1500 1600 120
+ LAX IAH  H4 1300 1420 200
+     PHX  P3 0900 0930  90
+ DEN PHX  P1 0700 0740  40
+ RIC ATL  A4 1900 1950  50
+*
+* 9. lots of successors without considering time, longest have 4 flights
+*
+PRTSUCC SAT
+ S1-IAH 0600-0630
+     H2-ATL 0300-0620
+         A1-MCO 1500-1550
+         A3-PHX 1300-1430
+             P1-DEN 0700-0740
+             P3-LAX 0900-0930
+             P4-MCO 1000-1540
+         A4-RIC 1900-1950
+     H3-MCO 1400-1710
+     H4-LAX 1300-1420
+     H5-PHX 1500-1600
+         P1-DEN 0700-0740
+         P3-LAX 0900-0930
+         P4-MCO 1000-1540
+         P5-ATL 1100-1620
+             A1-MCO 1500-1550
+             A4-RIC 1900-1950
+ S2-MCO 0800-1130
+ S3-ATL 1000-1330
+     A1-MCO 1500-1550
+     A2-IAH 0800-0920
+         H3-MCO 1400-1710
+         H4-LAX 1300-1420
+         H5-PHX 1500-1600
+             P1-DEN 0700-0740
+             P3-LAX 0900-0930
+             P4-MCO 1000-1540
+     A3-PHX 1300-1430
+         P1-DEN 0700-0740
+         P2-IAH 0800-1050
+             H3-MCO 1400-1710
+             H4-LAX 1300-1420
+         P3-LAX 0900-0930
+         P4-MCO 1000-1540
+     A4-RIC 1900-1950
+     A5-IAH 1800-1920
+         H3-MCO 1400-1710
+         H4-LAX 1300-1420
+         H5-PHX 1500-1600
+             P1-DEN 0700-0740
+             P3-LAX 0900-0930
+             P4-MCO 1000-1540
+*
+* 10. Considering time, the longest paths are two flights
+* 
+PRTCHRON SAT
+ S1-IAH 0600-0630
+       H3-MCO 1400-1710
+       H4-LAX 1300-1420
+       H5-PHX 1500-1600
+ S2-MCO 0800-1130
+ S3-ATL 1000-1330
+       A1-MCO 1500-1550
+       A4-RIC 1900-1950
+       A5-IAH 1800-1920
+PRTALTS SAT MCO
+ Alternatives for flights from SAT to MCO
+ Alt TDur             Org Dst Fl Dep - Arr Dura
+   1 11 Hours 10 mins
+                      SAT IAH S1 0600-0630   30
+                      IAH MCO H3 1400-1710  130
+   2 3 Hours 30 mins
+                      SAT MCO S2 0800-1130  150
+   3 5 Hours 50 mins
+                      SAT ATL S3 1000-1330  150
+                      ATL MCO A1 1500-1550   50
+MAXSTEPS SAT MCO
+ Maximum chain chron for SAT to MCO contains 2 steps
+*
+* 11. more flights 
+* 
+FLIGHT M1 MCO ATL 1300 50 0
+FLIGHT M2 MCO IAH 900 120 -1
+FLIGHT M3 MCO FLL 1800 30 0
+FLIGHT H6 IAH FLL 1200 120 1
+FLIGHT F1 FLL MCO 600 30 0
+FLIGHT F2 FLL IAH 2000 120 -1
+FLIGHT L1 LAX PHX 600 90 1
+FLIGHT L2 LAX IAH 1600 200 2
+FLIGHT L3 LAX MCO 1000 250 3
+FLIGHT D1 DEN PHX 900 40 0
+FLIGHT D2 DEN IAH 1800 80 1
+FLIGHT M4 MCO SAT 1200 200 -1
+FLIGHT S4 SAT FLL 1400 200 1
+FLIGHT H7 IAH DEN 1000 90 -1
+FLIGHT H8 IAH ATL 600 140 1
+*
+* 12. print many flights by origin
+*
+PRTFLIGHTBYORIGIN
+ Apt F# Dest Dep  Arr  Dur
+ SAT S1 IAH  0600 0630  30
+     S2 MCO  0800 1130 150
+     S3 ATL  1000 1330 150
+     S4 FLL  1400 1820 200
+ IAH H1 SAT  1200 1240  40
+     H2 ATL  0300 0620 140
+     H3 MCO  1400 1710 130
+     H4 LAX  1300 1420 200
+     H5 PHX  1500 1600 120
+     H6 FLL  1200 1500 120
+     H7 DEN  1000 1030  90
+     H8 ATL  0600 0920 140
+ ATL A1 MCO  1500 1550  50
+     A2 IAH  0800 0920 140
+     A3 PHX  1300 1430 210
+     A4 RIC  1900 1950  50
+     A5 IAH  1800 1920 140
+ MCO M1 ATL  1300 1350  50
+     M2 IAH  0900 1000 120
+     M3 FLL  1800 1830  30
+     M4 SAT  1200 1420 200
+ PHX P1 DEN  0700 0740  40
+     P2 IAH  0800 1050 110
+     P3 LAX  0900 0930  90
+     P4 MCO  1000 1540 220
+     P5 ATL  1100 1620 200
+ LAX L1 PHX  0600 0830  90
+     L2 IAH  1600 2120 200
+     L3 MCO  1000 1710 250
+ DEN D1 PHX  0900 0940  40
+     D2 IAH  1800 2020  80
+ RIC R1 ATL  0900 0950  50
+ FLL F1 MCO  0600 0630  30
+     F2 IAH  2000 2100 120
+*
+* 13. SAT has 2 pred and 4 successors
+*     IAH has 8 pred and 8 successors
+*     ATL has 6 pred and 5 successors
+*     FLL has 3 pred and 2 successors
+*
+PRTONE SAT 
+  0 SAT H1/IAH M4/MCO ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL 
+PRTALL
+  0 SAT H1/IAH M4/MCO ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL L2/LAX M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H4-LAX H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX R1/RIC S3/SAT ...... ...... A1-MCO A2-IAH A3-PHX A4-RIC A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH L3/LAX P4/PHX S2/SAT ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH L1/LAX ...... ...... ...... ...... P1-DEN P2-IAH P3-LAX P4-MCO P5-ATL 
+  5 LAX H4/IAH P3/PHX ...... ...... ...... ...... ...... ...... L1-PHX L2-IAH L3-MCO 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH 
+  7 RIC A4/ATL ...... ...... ...... ...... ...... ...... ...... R1-ATL 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+*
+* 14. Considering time, longest path is SAT to ATL to MCO to FLL to IAH
+*
+PRTCHRON SAT
+ S1-IAH 0600-0630
+       H3-MCO 1400-1710
+             M3-FLL 1800-1830
+       H4-LAX 1300-1420
+       H5-PHX 1500-1600
+       H6-FLL 1200-1500
+       H7-DEN 1000-1030
+ S2-MCO 0800-1130
+       M1-ATL 1300-1350
+             A4-RIC 1900-1950
+             A5-IAH 1800-1920
+       M3-FLL 1800-1830
+             F2-IAH 2000-2100
+ S3-ATL 1000-1330
+       A1-MCO 1500-1550
+             M3-FLL 1800-1830
+                   F2-IAH 2000-2100
+       A4-RIC 1900-1950
+       A5-IAH 1800-1920
+ S4-FLL 1400-1820
+       F2-IAH 2000-2100
+*
+* 15. Max path from SAT to FLL is 3 steps
+*
+PRTALTS SAT FLL 
+ Alternatives for flights from SAT to FLL
+ Alt TDur             Org Dst Fl Dep - Arr Dura
+   1 12 Hours 30 mins
+                      SAT IAH S1 0600-0630   30
+                      IAH MCO H3 1400-1710  130
+                      MCO FLL M3 1800-1830   30
+   2 9 Hours 0 mins
+                      SAT IAH S1 0600-0630   30
+                      IAH FLL H6 1200-1500  120
+   3 10 Hours 30 mins
+                      SAT MCO S2 0800-1130  150
+                      MCO FLL M3 1800-1830   30
+   4 8 Hours 30 mins
+                      SAT ATL S3 1000-1330  150
+                      ATL MCO A1 1500-1550   50
+                      MCO FLL M3 1800-1830   30
+   5 4 Hours 20 mins
+                      SAT FLL S4 1400-1820  200
+MAXSTEPS SAT FLL
+ Maximum chain chron for SAT to FLL contains 3 steps
+*
+* 16. Add another flight from SAT to PHX
+* 
+FLIGHT S5 SAT PHX 500 110 -1
+PRTALL
+  0 SAT H1/IAH M4/MCO ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL S5-PHX 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL L2/LAX M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H4-LAX H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX R1/RIC S3/SAT ...... ...... A1-MCO A2-IAH A3-PHX A4-RIC A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH L3/LAX P4/PHX S2/SAT ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH L1/LAX S5/SAT ...... ...... ...... P1-DEN P2-IAH P3-LAX P4-MCO P5-ATL 
+  5 LAX H4/IAH P3/PHX ...... ...... ...... ...... ...... ...... L1-PHX L2-IAH L3-MCO 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH 
+  7 RIC A4/ATL ...... ...... ...... ...... ...... ...... ...... R1-ATL 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+*
+* 17. Considering time, max path from SAT to FLL is 4 steps
+*
+PRTCHRON SAT
+ S1-IAH 0600-0630
+       H3-MCO 1400-1710
+             M3-FLL 1800-1830
+       H4-LAX 1300-1420
+       H5-PHX 1500-1600
+       H6-FLL 1200-1500
+       H7-DEN 1000-1030
+ S2-MCO 0800-1130
+       M1-ATL 1300-1350
+             A4-RIC 1900-1950
+             A5-IAH 1800-1920
+       M3-FLL 1800-1830
+             F2-IAH 2000-2100
+ S3-ATL 1000-1330
+       A1-MCO 1500-1550
+             M3-FLL 1800-1830
+                   F2-IAH 2000-2100
+       A4-RIC 1900-1950
+       A5-IAH 1800-1920
+ S4-FLL 1400-1820
+       F2-IAH 2000-2100
+ S5-PHX 0500-0550
+       P1-DEN 0700-0740
+             D2-IAH 1800-2020
+       P2-IAH 0800-1050
+             H3-MCO 1400-1710
+                   M3-FLL 1800-1830
+             H4-LAX 1300-1420
+             H6-FLL 1200-1500
+       P3-LAX 0900-0930
+             L2-IAH 1600-2120
+             L3-MCO 1000-1710
+                   M3-FLL 1800-1830
+                         F2-IAH 2000-2100
+       P4-MCO 1000-1540
+             M3-FLL 1800-1830
+                   F2-IAH 2000-2100
+       P5-ATL 1100-1620
+             A4-RIC 1900-1950
+             A5-IAH 1800-1920
+MAXSTEPS SAT FLL
+ Maximum chain chron for SAT to FLL contains 4 steps
+*
+* 18. Considering time, there are 9 paths from SAT to FLL
+*
+PRTALTS SAT FLL
+ Alternatives for flights from SAT to FLL
+ Alt TDur             Org Dst Fl Dep - Arr Dura
+   1 12 Hours 30 mins
+                      SAT IAH S1 0600-0630   30
+                      IAH MCO H3 1400-1710  130
+                      MCO FLL M3 1800-1830   30
+   2 9 Hours 0 mins
+                      SAT IAH S1 0600-0630   30
+                      IAH FLL H6 1200-1500  120
+   3 10 Hours 30 mins
+                      SAT MCO S2 0800-1130  150
+                      MCO FLL M3 1800-1830   30
+   4 8 Hours 30 mins
+                      SAT ATL S3 1000-1330  150
+                      ATL MCO A1 1500-1550   50
+                      MCO FLL M3 1800-1830   30
+   5 4 Hours 20 mins
+                      SAT FLL S4 1400-1820  200
+   6 13 Hours 30 mins
+                      SAT PHX S5 0500-0550  110
+                      PHX IAH P2 0800-1050  110
+                      IAH MCO H3 1400-1710  130
+                      MCO FLL M3 1800-1830   30
+   7 10 Hours 0 mins
+                      SAT PHX S5 0500-0550  110
+                      PHX IAH P2 0800-1050  110
+                      IAH FLL H6 1200-1500  120
+   8 13 Hours 30 mins
+                      SAT PHX S5 0500-0550  110
+                      PHX LAX P3 0900-0930   90
+                      LAX MCO L3 1000-1710  250
+                      MCO FLL M3 1800-1830   30
+   9 13 Hours 30 mins
+                      SAT PHX S5 0500-0550  110
+                      PHX MCO P4 1000-1540  220
+                      MCO FLL M3 1800-1830   30
+MAXSTEPS SAT FLL
+ Maximum chain chron for SAT to FLL contains 4 steps
+*
+* 19-1. Before deleting LAX, show all 
+*
+PRTALL
+  0 SAT H1/IAH M4/MCO ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL S5-PHX 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL L2/LAX M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H4-LAX H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX R1/RIC S3/SAT ...... ...... A1-MCO A2-IAH A3-PHX A4-RIC A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH L3/LAX P4/PHX S2/SAT ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH L1/LAX S5/SAT ...... ...... ...... P1-DEN P2-IAH P3-LAX P4-MCO P5-ATL 
+  5 LAX H4/IAH P3/PHX ...... ...... ...... ...... ...... ...... L1-PHX L2-IAH L3-MCO 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH 
+  7 RIC A4/ATL ...... ...... ...... ...... ...... ...... ...... R1-ATL 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+*
+* 19-2.DELETE LAX. This also removes flights H4, P3, L1, L2, L3
+*       IAH - 7 pred (removed L2), 7 succ (removed H4)
+*       MCO - 5 pred (removed L3), 4 succ
+*       PHX - 4 pred (removed L1), 4 succ (removed P3)  
+*       LAX should not exist
+DELETE LAX
+PRTALL
+  0 SAT H1/IAH M4/MCO ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL S5-PHX 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX R1/RIC S3/SAT ...... ...... A1-MCO A2-IAH A3-PHX A4-RIC A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH P4/PHX S2/SAT ...... ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH S5/SAT ...... ...... ...... ...... P1-DEN P2-IAH P4-MCO P5-ATL 
+  5 LAX ...... ...... ...... ...... ...... ...... ...... ...... ...... 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH 
+  7 RIC A4/ATL ...... ...... ...... ...... ...... ...... ...... R1-ATL 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+*
+* 19-3. Since LAX is deleted, these should show a WARNING and not terminate
+*
+PRTONE LAX
+ Warning: This Airport does not exist
+PRTSUCC LAX
+ Warning: This Airport does not exist
+PRTCHRON LAX
+ Warning: This Airport does not exist
+PRTALTS LAX MCO
+ Warning: This Airport does not exist
+MAXSTEPS LAX MCO
+ Warning: This Airport does not exist
+DELETE LAX
+ Warning: This Airport does not exist
+*
+* 20. DELETE RIC. This also removes flights A4 and R1
+*
+DELETE RIC
+PRTALL
+  0 SAT H1/IAH M4/MCO ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL S5-PHX 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX S3/SAT ...... ...... ...... A1-MCO A2-IAH A3-PHX A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH P4/PHX S2/SAT ...... ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH S5/SAT ...... ...... ...... ...... P1-DEN P2-IAH P4-MCO P5-ATL 
+  5 LAX ...... ...... ...... ...... ...... ...... ...... ...... ...... 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH 
+  7 RIC ...... ...... ...... ...... ...... ...... ...... ...... ...... 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+*
+* 21. Insert D3.  If not doing hashing: 
+*       - LFL will be the last airport in vertexM
+*       - We won't use the empty one until we run out of
+*       - entries.  
+*     If hashing, LFL will be at subscript 6.
+*
+FLIGHT D3 DEN LFL 800 200 2
+PRTALL
+  0 SAT H1/IAH M4/MCO ...... ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL S5-PHX 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX S3/SAT ...... ...... ...... A1-MCO A2-IAH A3-PHX A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH P4/PHX S2/SAT ...... ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH S5/SAT ...... ...... ...... ...... P1-DEN P2-IAH P4-MCO P5-ATL 
+  5 LAX ...... ...... ...... ...... ...... ...... ...... ...... ...... 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH D3-LFL 
+  7 RIC ...... ...... ...... ...... ...... ...... ...... ...... ...... 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+  9 LFL D3/DEN ...... ...... ...... ...... ...... ...... ...... ...... 
+*
+* 22. Insert X1 which will insert airport LAX again.
+*
+FLIGHT X1 LAX SAT 1200 300 2
+PRTALL
+  0 SAT H1/IAH M4/MCO X1/LAX ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL S5-PHX 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX S3/SAT ...... ...... ...... A1-MCO A2-IAH A3-PHX A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH P4/PHX S2/SAT ...... ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH S5/SAT ...... ...... ...... ...... P1-DEN P2-IAH P4-MCO P5-ATL 
+  5 LAX ...... ...... ...... ...... ...... ...... ...... ...... X1-SAT 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH D3-LFL 
+  7 RIC ...... ...... ...... ...... ...... ...... ...... ...... ...... 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+  9 LFL D3/DEN ...... ...... ...... ...... ...... ...... ...... ...... 
+*
+* 23. Due to previous deletion of LAX, considering time, there are no paths from LAX to IAH 
+*
+PRTCHRON LAX
+ X1-SAT 1200-1900
+PRTALTS LAX IAH
+ No paths for flights from LAX to IAH
+MAXSTEPS LAX IAH
+ Maximum chain chron for LAX to IAH contains 0 steps
+*
+* 24. Add the LAX flights
+*
+FLIGHT L1 LAX PHX 600 90 1
+FLIGHT L2 LAX IAH 1600 200 2
+FLIGHT L3 LAX MCO 1000 250 3
+*
+* 25. LAX should have 0 predecessors and 4 successors
+*
+PRTALL
+  0 SAT H1/IAH M4/MCO X1/LAX ...... ...... ...... ...... ...... S1-IAH S2-MCO S3-ATL S4-FLL S5-PHX 
+  1 IAH A2/ATL A5/ATL D2/DEN F2/FLL L2/LAX M2/MCO P2/PHX S1/SAT H1-SAT H2-ATL H3-MCO H5-PHX H6-FLL H7-DEN H8-ATL 
+  2 ATL H2/IAH H8/IAH M1/MCO P5/PHX S3/SAT ...... ...... ...... A1-MCO A2-IAH A3-PHX A5-IAH 
+  3 MCO A1/ATL F1/FLL H3/IAH L3/LAX P4/PHX S2/SAT ...... ...... M1-ATL M2-IAH M3-FLL M4-SAT 
+  4 PHX A3/ATL D1/DEN H5/IAH L1/LAX S5/SAT ...... ...... ...... P1-DEN P2-IAH P4-MCO P5-ATL 
+  5 LAX ...... ...... ...... ...... ...... ...... ...... ...... L1-PHX L2-IAH L3-MCO X1-SAT 
+  6 DEN H7/IAH P1/PHX ...... ...... ...... ...... ...... ...... D1-PHX D2-IAH D3-LFL 
+  7 RIC ...... ...... ...... ...... ...... ...... ...... ...... ...... 
+  8 FLL H6/IAH M3/MCO S4/SAT ...... ...... ...... ...... ...... F1-MCO F2-IAH 
+  9 LFL D3/DEN ...... ...... ...... ...... ...... ...... ...... ...... 
+*
+* 26. With LAX added, considering time, there are 4 paths from LAX to IAH 
+*
+PRTCHRON LAX
+ L1-PHX 0600-0830
+       P4-MCO 1000-1540
+             M3-FLL 1800-1830
+                   F2-IAH 2000-2100
+       P5-ATL 1100-1620
+             A5-IAH 1800-1920
+ L2-IAH 1600-2120
+ L3-MCO 1000-1710
+       M3-FLL 1800-1830
+             F2-IAH 2000-2100
+ X1-SAT 1200-1900
+PRTALTS LAX IAH
+ Alternatives for flights from LAX to IAH
+ Alt TDur             Org Dst Fl Dep - Arr Dura
+   1 15 Hours 0 mins
+                      LAX PHX L1 0600-0830   90
+                      PHX MCO P4 1000-1540  220
+                      MCO FLL M3 1800-1830   30
+                      FLL IAH F2 2000-2100  120
+   2 13 Hours 20 mins
+                      LAX PHX L1 0600-0830   90
+                      PHX ATL P5 1100-1620  200
+                      ATL IAH A5 1800-1920  140
+   3 5 Hours 20 mins
+                      LAX IAH L2 1600-2120  200
+   4 11 Hours 0 mins
+                      LAX MCO L3 1000-1710  250
+                      MCO FLL M3 1800-1830   30
+                      FLL IAH F2 2000-2100  120
+MAXSTEPS LAX IAH
+ Maximum chain chron for LAX to IAH contains 4 steps

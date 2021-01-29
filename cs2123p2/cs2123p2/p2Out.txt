@@ -1,0 +1,293 @@
+Input data:
+CUSTOMER 11111 BOB WIRE
+TRAIT GENDER M
+TRAIT SMOKING N
+TRAIT EXERCISE BIKE
+TRAIT EXERCISE HIKE
+CUSTOMER 22222 MELBA TOAST
+TRAIT GENDER F
+TRAIT SMOKING N
+TRAIT BOOK COOKING
+CUSTOMER 33333 CRYSTAL BALL
+TRAIT GENDER F
+TRAIT SMOKING N
+TRAIT EXERCISE JOG
+TRAIT EXERCISE YOGA
+TRAIT BOOK PSYCHIC
+CUSTOMER 33355 TED E BARR
+TRAIT GENDER M
+TRAIT SMOKING N
+TRAIT MOVIE HORROR
+TRAIT EXERCISE HIKE
+CUSTOMER 33366 REED BOOK
+TRAIT GENDER M
+TRAIT SMOKING N
+TRAIT BOOK SCIFI
+TRAIT BOOK DRAMA
+TRAIT BOOK MYSTERY
+TRAIT BOOK HORROR
+TRAIT BOOK TRAVEL
+TRAIT BOOK ROMANCE
+CUSTOMER 44444 AVA KASHUN
+TRAIT SMOKING N
+TRAIT GENDER F
+TRAIT BOOK TRAVEL
+TRAIT MOVIE ACTION
+TRAIT EXERCISE HIKE
+TRAIT EXERCISE BIKE
+TRAIT EXERCISE RUN
+TRAIT EXERCISE GOLF
+TRAIT EXERCISE JOG
+TRAIT EXERCISE DANCE
+TRAIT MOVIE ROMANCE
+CUSTOMER 55555 ROCK D BOAT
+TRAIT GENDER M
+TRAIT SMOKING Y
+CUSTOMER 55511 JIMMY LOCK
+TRAIT GENDER M
+TRAIT SMOKING Y
+TRAIT BOOK TRAVEL
+TRAIT MOVIE ACTION
+CUSTOMER 555111 SPRING WATER
+TRAIT GENDER F
+TRAIT SMOKING N
+TRAIT EXERCISE SWIM
+TRAIT EXERCISE YOGA
+CUSTOMER 66666 E VILLE
+TRAIT SMOKING Y
+TRAIT GENDER M
+TRAIT EXERCISE BIKE
+TRAIT MOVIE HORROR
+TRAIT BOOK HORROR
+CUSTOMER 77777 ANITA PACK
+TRAIT SMOKING Y
+TRAIT GENDER F
+TRAIT BOOK SCIFI
+TRAIT EXERCISE YOGA
+CUSTOMER 88888 HARRY HEAD
+TRAIT SMOKING N
+TRAIT GENDER M
+TRAIT BOOK SCIFI
+TRAIT BOOK HORROR
+TRAIT EXERCISE BIKE
+CUSTOMER 99999 E RACE
+TRAIT GENDER M
+TRAIT SMOKING N
+TRAIT BOOK SCIFI
+TRAIT MOVIE ACTION
+TRAIT EXERCISE HIKEID     Customer Name       
+           Trait      Value       
+11111  BOB WIRE            
+           GENDER     M           
+           SMOKING    N           
+           EXERCISE   BIKE        
+           EXERCISE   HIKE        
+22222  MELBA TOAST         
+           GENDER     F           
+           SMOKING    N           
+           BOOK       COOKING     
+33333  CRYSTAL BALL        
+           GENDER     F           
+           SMOKING    N           
+           EXERCISE   JOG         
+           EXERCISE   YOGA        
+           BOOK       PSYCHIC     
+33355  TED E BARR          
+           GENDER     M           
+           SMOKING    N           
+           MOVIE      HORROR      
+           EXERCISE   HIKE        
+33366  REED BOOK           
+           GENDER     M           
+           SMOKING    N           
+           BOOK       SCIFI       
+           BOOK       DRAMA       
+           BOOK       MYSTERY     
+           BOOK       HORROR      
+           BOOK       TRAVEL      
+           BOOK       ROMANCE     
+44444  AVA KASHUN          
+           SMOKING    N           
+           GENDER     F           
+           BOOK       TRAVEL      
+           MOVIE      ACTION      
+           EXERCISE   HIKE        
+           EXERCISE   BIKE        
+           EXERCISE   RUN         
+           EXERCISE   GOLF        
+           EXERCISE   JOG         
+           EXERCISE   DANCE       
+           MOVIE      ROMANCE     
+55555  ROCK D BOAT         
+           GENDER     M           
+           SMOKING    Y           
+55511  JIMMY LOCK          
+           GENDER     M           
+           SMOKING    Y           
+           BOOK       TRAVEL      
+           MOVIE      ACTION      
+555111 SPRING WATER        
+           GENDER     F           
+           SMOKING    N           
+           EXERCISE   SWIM        
+           EXERCISE   YOGA        
+66666  E VILLE             
+           SMOKING    Y           
+           GENDER     M           
+           EXERCISE   BIKE        
+           MOVIE      HORROR      
+           BOOK       HORROR      
+77777  ANITA PACK          
+           SMOKING    Y           
+           GENDER     F           
+           BOOK       SCIFI       
+           EXERCISE   YOGA        
+88888  HARRY HEAD          
+           SMOKING    N           
+           GENDER     M           
+           BOOK       SCIFI       
+           BOOK       HORROR      
+           EXERCISE   BIKE        
+99999  E RACE              
+           GENDER     M           
+           SMOKING    N           
+           BOOK       SCIFI       
+           MOVIE      ACTION      
+           EXERCISE   HIKE        
+Query # 1: SMOKING = N
+	SMOKING N = 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	22222   MELBA TOAST         
+	33333   CRYSTAL BALL        
+	33355   TED E BARR          
+	33366   REED BOOK           
+	44444   AVA KASHUN          
+	555111  SPRING WATER        
+	88888   HARRY HEAD          
+	99999   E RACE              
+Query # 2: SMOKING = Y
+	SMOKING Y = 
+	Query Result:
+	ID      Customer Name       
+	55555   ROCK D BOAT         
+	55511   JIMMY LOCK          
+	66666   E VILLE             
+	77777   ANITA PACK          
+Query # 3: GENDER = F
+	GENDER F = 
+	Query Result:
+	ID      Customer Name       
+	22222   MELBA TOAST         
+	33333   CRYSTAL BALL        
+	44444   AVA KASHUN          
+	555111  SPRING WATER        
+	77777   ANITA PACK          
+Query # 4: SMOKING = N AND GENDER = F
+	SMOKING N = GENDER F = AND 
+	Query Result:
+	ID      Customer Name       
+	22222   MELBA TOAST         
+	33333   CRYSTAL BALL        
+	44444   AVA KASHUN          
+	555111  SPRING WATER        
+Query # 5: BOOK NEVER SCIFI
+	BOOK SCIFI NEVER 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	22222   MELBA TOAST         
+	33333   CRYSTAL BALL        
+	33355   TED E BARR          
+	44444   AVA KASHUN          
+	55555   ROCK D BOAT         
+	55511   JIMMY LOCK          
+	555111  SPRING WATER        
+	66666   E VILLE             
+Query # 6: BOOK ONLY SCIFI 
+	BOOK SCIFI ONLY 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	33355   TED E BARR          
+	55555   ROCK D BOAT         
+	555111  SPRING WATER        
+	77777   ANITA PACK          
+	99999   E RACE              
+Query # 7: SMOKING = N AND ( EXERCISE = HIKE OR EXERCISE = BIKE )
+	SMOKING N = EXERCISE HIKE = EXERCISE BIKE = OR AND 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	33355   TED E BARR          
+	44444   AVA KASHUN          
+	88888   HARRY HEAD          
+	99999   E RACE              
+Query # 8: GENDER = F AND EXERCISE NEVER YOGA
+	GENDER F = EXERCISE YOGA NEVER AND 
+	Query Result:
+	ID      Customer Name       
+	22222   MELBA TOAST         
+	44444   AVA KASHUN          
+Query # 9: SMOKING = N AND EXERCISE = HIKE OR EXERCISE = BIKE
+	SMOKING N = EXERCISE HIKE = AND EXERCISE BIKE = OR 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	33355   TED E BARR          
+	44444   AVA KASHUN          
+	66666   E VILLE             
+	88888   HARRY HEAD          
+	99999   E RACE              
+Query # 10: SMOKING = N AND EXERCISE = HIKE AND EXERCISE = BIKE
+	SMOKING N = EXERCISE HIKE = AND EXERCISE BIKE = AND 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	44444   AVA KASHUN          
+Query # 11: SMOKING = N AND ( EXERCISE = HIKE OR EXERCISE = BIKE ) AND BOOK = SCIFI
+	SMOKING N = EXERCISE HIKE = EXERCISE BIKE = OR AND BOOK 
+	SCIFI = AND 
+	Query Result:
+	ID      Customer Name       
+	88888   HARRY HEAD          
+	99999   E RACE              
+Query # 12: GENDER = F AND SMOKING = N OR BOOK = SCIFI AND EXERCISE = HIKE
+	GENDER F = SMOKING N = AND BOOK SCIFI = OR EXERCISE 
+	HIKE = AND 
+	Query Result:
+	ID      Customer Name       
+	44444   AVA KASHUN          
+	99999   E RACE              
+Query # 13: ( ( SMOKING = N ) AND ( BOOK ONLY SCIFI ) AND ( EXERCISE = HIKE ) )
+	SMOKING N = BOOK SCIFI ONLY AND EXERCISE HIKE = AND 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	33355   TED E BARR          
+	99999   E RACE              
+Query # 14: ( BOOK = SCIFI )
+	BOOK SCIFI = 
+	Query Result:
+	ID      Customer Name       
+	33366   REED BOOK           
+	77777   ANITA PACK          
+	88888   HARRY HEAD          
+	99999   E RACE              
+Query # 15: ( ( ( BOOK ONLY SCIFI ) ) )
+	BOOK SCIFI ONLY 
+	Query Result:
+	ID      Customer Name       
+	11111   BOB WIRE            
+	33355   TED E BARR          
+	55555   ROCK D BOAT         
+	555111  SPRING WATER        
+	77777   ANITA PACK          
+	99999   E RACE              
+Query # 16: ( ( SMOKING = N )
+	Warning: missing right parenthesis
+Query # 17: ( SMOKING = N ) AND ( BOOK ONLY SCIFI ) AND ( EXERCISE = HIKE ) )
+	Warning: missing left parenthesis
+Query # 18: ( GENDER = M ) AND EXERCISE = BIKE )	Warning: missing left parenthesis
+

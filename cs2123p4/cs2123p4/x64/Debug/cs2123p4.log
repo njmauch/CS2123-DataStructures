@@ -1,0 +1,18 @@
+﻿  cs2123p4.c
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(9): warning C4013: 'processCommandSwitches' undefined; assuming extern returning int
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(171): warning C4101: 'pPrecedes': unreferenced local variable
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(203): warning C4047: 'function': 'rsize_t' differs in levels of indirection from 'char *'
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(203): warning C4024: 'strcpy_s': different types for formal and actual parameter 2
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(203): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(203): warning C4024: 'strcpy_s': different types for formal and actual parameter 3
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(214): warning C4133: 'function': incompatible types - from 'Simulation' to 'LinkedList'
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(225): warning C4013: 'release' undefined; assuming extern returning int
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(241): warning C4133: 'function': incompatible types - from 'Simulation' to 'LinkedList'
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(274): warning C4133: 'function': incompatible types - from 'Simulation' to 'LinkedList'
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(409): warning C4013: 'va_start' undefined; assuming extern returning int
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(414): warning C4013: 'va_end' undefined; assuming extern returning int
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(503): warning C4047: 'function': 'rsize_t' differs in levels of indirection from 'char *'
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(503): warning C4024: 'strcpy_s': different types for formal and actual parameter 2
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(503): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(503): warning C4024: 'strcpy_s': different types for formal and actual parameter 3
+c:\users\njmau\source\repos\cs2123p4\cs2123p4\cs2123p4.c(409): error C4700: uninitialized local variable 'args' used

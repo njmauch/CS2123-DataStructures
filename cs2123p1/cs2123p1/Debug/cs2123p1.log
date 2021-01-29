@@ -1,0 +1,4 @@
+﻿  cs2123p1.c
+c:\users\njmau\source\repos\cs2123p1\cs2123p1\cs2123p1.c(33): warning C4013: 'strcpy' undefined; assuming extern returning int
+cs2123p1.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+  cs2123p1.vcxproj -> C:\Users\njmau\source\repos\cs2123p1\Debug\cs2123p1.exe

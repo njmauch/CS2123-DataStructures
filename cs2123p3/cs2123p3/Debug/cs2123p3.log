@@ -1,0 +1,5 @@
+﻿  cs2123p3.c
+c:\users\njmau\source\repos\cs2123p3\cs2123p3\cs2123p3.c(31): warning C4100: 'argv': unreferenced formal parameter
+c:\users\njmau\source\repos\cs2123p3\cs2123p3\cs2123p3.c(31): warning C4100: 'argc': unreferenced formal parameter
+c:\users\njmau\source\repos\cs2123p3\cs2123p3\cs2123p3.c(171): warning C4100: 'list': unreferenced formal parameter
+  cs2123p3.vcxproj -> C:\Users\njmau\source\repos\cs2123p3\Debug\cs2123p3.exe
